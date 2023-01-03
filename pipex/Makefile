@@ -6,7 +6,7 @@
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/29 18:01:50 by houaslam          #+#    #+#              #
-#    Updated: 2022/12/23 18:09:12 by houaslam         ###   ########.fr        #
+#    Updated: 2023/01/03 11:44:45 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ SRCS =  ft_split.c \
 		outils.c \
 		pipex.c
 
-B_SRCS =  pipex_bonus.c	
+BSRC =  ft_split.c \
+		outils.c \
+		pipex_bonus.c
+		
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
@@ -27,6 +30,7 @@ ${LIB} : ${OBJ}
 
 ${NAME} : ${OBJ}
 	cc ${OBJ} ${LIB} -o ${NAME}
+	
 clean :
 	rm -f ${OBJ}
 

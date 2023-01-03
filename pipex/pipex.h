@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:50:51 by houaslam          #+#    #+#             */
-/*   Updated: 2022/12/23 18:08:40 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/02 11:47:09 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,4 @@ void	last_child(int fd[2], char **av, char **envp);
 char	**ft_freestr(char **arr, int p);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_free(char **res);
-void    ft_close(int **fd[], int i, int ac)
 #endif
