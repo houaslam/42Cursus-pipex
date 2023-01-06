@@ -5,22 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/29 18:01:50 by houaslam          #+#    #+#              #
-#    Updated: 2023/01/03 11:44:45 by houaslam         ###   ########.fr        #
+#    Created: 2023/01/03 16:30:36 by houaslam          #+#    #+#              #
+#    Updated: 2023/01/06 15:48:00 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =  ft_split.c \
+SRCS =  split.c \
 		outils.c \
-		pipex.c
+		pipex.c \
+		libft.c 
 
-BSRC =  ft_split.c \
-		outils.c \
-		pipex_bonus.c
-		
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
@@ -30,7 +28,7 @@ ${LIB} : ${OBJ}
 
 ${NAME} : ${OBJ}
 	cc ${OBJ} ${LIB} -o ${NAME}
-	
+
 clean :
 	rm -f ${OBJ}
 

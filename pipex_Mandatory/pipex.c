@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 13:55:51 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/03 11:49:00 by houaslam         ###   ########.fr       */
+/*   Created: 2023/01/03 16:08:50 by houaslam          #+#    #+#             */
+/*   Updated: 2023/01/06 15:48:41 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ int	main(int ac, char **av, char **envp)
 	pid_t	pid;
 	pid_t	pid2;
 
-	if (ac == 5 && access(av[1], F_OK))
+	if (ac != 5)
 		ft_putstr_fd("invalid arguments", 2);
-	if (pipe(fds) == -1)
-		ft_putstr_fd("pipe failure", 2);
+	pipe(fds);
 	pid = fork();
 	if (pid == 0)
 		first_child(fds, av, envp);
@@ -43,6 +42,8 @@ void	first_child(int fd[2], char **av, char **envp)
 	char	*path;
 
 	in_f = open(av[1], O_RDONLY);
+	if (in_f < 0)
+		ft_putstr_fd("no such file or directory", 2);
 	if (dup2(in_f, 0) == -1)
 		ft_putstr_fd("dup2 fail", 2);
 	if (dup2(fd[1], 1) == -1)
@@ -67,7 +68,7 @@ void	last_child(int fd[2], char **av, char **envp)
 	char	**cmd;
 	char	*path;
 
-	out_f = open(av[4], O_CREAT | O_RDWR, 0777);
+	out_f = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0777);
 	if (dup2(fd[0], 0) == -1)
 		ft_putstr_fd("dup2 fail", 2);
 	if (dup2(out_f, 1) == -1)
@@ -84,45 +85,4 @@ void	last_child(int fd[2], char **av, char **envp)
 	path = path_find(envp, cmd[0]);
 	execve(path, cmd, envp);
 	ft_putstr_fd("second command not found\n", 2);
-}
-
-void	ft_free(char **res)
-{
-	int	i;
-
-	i = 0;
-	while (res[i])
-	{
-		free(res[i]);
-		i++;
-	}
-	free(res);
-}
-
-char	*path_find(char **envp, char *cmd)
-{
-	char	*hld;
-	char	**res;
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (ft_strncmp(*envp, "PATH", 4))
-		envp++;
-	hld = *envp + 5;
-	res = ft_split(hld, ':');
-	while (res[i])
-	{	
-		res[i] = ft_strjoin(res[i], "/");
-		res[i] = ft_strjoin(res[i], cmd);
-		i++;
-	}
-	i = 0;
-	while (access(res[i], X_OK) == -1 && res[i])
-			i++;
-	if (res[i] == NULL)
-		return (NULL);
-	str = ft_strdup(res[i]);
-	ft_free(res);
-	return (str);
 }

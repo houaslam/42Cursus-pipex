@@ -5,19 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/29 18:01:50 by houaslam          #+#    #+#              #
-#    Updated: 2022/12/23 18:54:59 by houaslam         ###   ########.fr        #
+#    Created: 2023/01/03 16:30:36 by houaslam          #+#    #+#              #
+#    Updated: 2023/01/06 15:47:17 by houaslam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =  ft_split.c \
+SRCS =  split.c \
 		outils.c \
-		pipex_bonus.c
+		multi_pipe.c \
+		libft.c 
 
-B_SRCS =  pipex_bonus.c	
 all : ${NAME}
 
 OBJ = ${SRCS:.c=.o}
@@ -27,6 +28,7 @@ ${LIB} : ${OBJ}
 
 ${NAME} : ${OBJ}
 	cc ${OBJ} ${LIB} -o ${NAME}
+
 clean :
 	rm -f ${OBJ}
 
