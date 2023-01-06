@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:10:55 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/06 15:03:44 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:03:54 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 
 	i = 0;
 	if (!s1)
-		ft_putstr_fd("command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2, 127);
 	str = (unsigned char *)s1;
 	str1 = (unsigned char *)s2;
 	while ((i < n) && (str[i] != '\0' || str1[i] != '\0'))

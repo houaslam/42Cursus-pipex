@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:10:00 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/06 14:54:36 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:09:03 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*path_find(char **envp, char *cmd)
 	return (str);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *s, int fd, int status)
 {
 	int	i;
 
@@ -52,5 +52,5 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, &s[i], 1);
 		i++;
 	}
-	exit(1);
+	exit(status);
 }

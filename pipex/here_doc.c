@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:19:24 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/04 22:48:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/06 22:18:15 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int ac, char **av, char **envp)
+void	here_doc(int ac, char **av, char **envp)
 {
 	pid_t	pid;
 	pid_t	pid2;
@@ -34,7 +34,7 @@ int	main(int ac, char **av, char **envp)
 		waitpid(pid, NULL, 0);
 	}
 	else
-		ft_putstr_fd("arguments are invalid", 2);
+		ft_putstr_fd("arguments are invalid", 2, 127);
 }
 
 void	f_child(int fd[2], char **av, char **envp)
@@ -52,13 +52,12 @@ void	f_child(int fd[2], char **av, char **envp)
 	cmd = ft_split(av[3], ' ');
 	if (av[3][0] == '/')
 	{
-		if (!execve(cmd[0], cmd, envp))
-			exit(1);
+		if (execve(cmd[0], cmd, envp) == -1)
+			ft_putstr_fd("command not found\n", 2, 127);
 	}
 	path = path_find(envp, cmd[0]);
 	execve(path, cmd, envp);
-	ft_putstr_fd("command not found\n", 2);
-	waitpid(0, NULL, 0);
+	ft_putstr_fd("command not found\n", 2, 127);
 }
 
 void	l_child(int fd[2], char **av, char **envp)
@@ -67,21 +66,22 @@ void	l_child(int fd[2], char **av, char **envp)
 	char	**cmd;
 	char	*path;
 
-	out_f = open(av[5], O_CREAT | O_RDWR | O_TRUNC, 0777);
+	out_f = open(av[5], O_CREAT | O_RDWR | O_APPEND, 0644);
 	if (out_f < 0)
-		ft_putstr_fd("out file cannot be opened", 2);
+		ft_putstr_fd("out file cannot be opened", 2, 1);
+	close(fd[1]);
 	dup2(fd[0], 0);
 	dup2(out_f, 1);
-	close(fd[1]);
+	close(fd[0]);
 	cmd = ft_split(av[4], ' ');
 	if (av[4][0] == '/')
 	{
-		if (!execve(cmd[0], cmd, envp))
-			exit(1);
+		if (execve(cmd[0], cmd, envp) == -1)
+			ft_putstr_fd("command not found\n", 2, 127);
 	}
 	path = path_find(envp, cmd[0]);
 	execve(path, cmd, envp);
-	ft_putstr_fd("command not found\n", 2);
+	ft_putstr_fd("command not found\n", 2, 127);
 }
 
 void	o_child(char **av, int fds[2])
