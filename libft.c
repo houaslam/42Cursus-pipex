@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:10:55 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/06 20:03:54 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:58:33 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 
 	i = 0;
 	if (!s1)
-		ft_putstr_fd("command not found\n", 2, 127);
+		return (0);
 	str = (unsigned char *)s1;
 	str1 = (unsigned char *)s2;
 	while ((i < n) && (str[i] != '\0' || str1[i] != '\0'))
@@ -52,25 +52,22 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	c;
 	char	*str;
 
-	if (!s1)
-	{
-		s1 = (char *)malloc(1 * sizeof(char));
-		s1[0] = '\0';
-	}
-	if (!s1 || !s2)
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	if (s1 && !s2)
+		return (ft_strdup(s1));
+	if (!s1 && !s2)
 		return (NULL);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	i = -1;
 	c = 0;
-	if (s1)
-		while (s1[++i] != '\0')
+	while (s1[++i] != '\0')
 			str[i] = s1[i];
 	while (s2[c] != '\0')
 		str[i++] = s2[c++];
-	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
-	free(s1);
+	str[i] = '\0';
 	return (str);
 }
 

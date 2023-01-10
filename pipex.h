@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:19:51 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/06 22:16:46 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:59:00 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	last_child(int fd[2], char **av, char **envp);
 char	*path_find(char **envp, char *cmd);
 void	first_child(int fd[2], char **av, char **envp);
 void	ft_putstr_fd(char *s, int fd, int status);
+void	join(char **res, int i, char *cmd);
 
 //pipex bonus
 
@@ -65,6 +66,6 @@ char	*get_next_line(int fd);
 void	o_child(char **av, int fds[2]);
 void	l_child(int fd[2], char **av, char **envp);
 void	f_child(int fd[2], char **av, char **envp);
-void	here_doc(int ac, char **av, char **envp);
+void	here_doc(char **av, char **envp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:10:00 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/06 20:09:03 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/10 15:57:50 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,11 @@ char	*path_find(char **envp, char *cmd)
 	i = 0;
 	while (ft_strncmp(*envp, "PATH", 4))
 		envp++;
+	if (!*envp)
+		return (NULL);
 	hld = *envp + 5;
 	res = ft_split(hld, ':');
-	while (res[i])
-	{	
-		res[i] = ft_strjoin(res[i], "/");
-		res[i] = ft_strjoin(res[i], cmd);
-		i++;
-	}
+	join(res, i, cmd);
 	i = 0;
 	while (access(res[i], X_OK) == -1 && res[i])
 			i++;
@@ -53,4 +50,14 @@ void	ft_putstr_fd(char *s, int fd, int status)
 		i++;
 	}
 	exit(status);
+}
+
+void	join(char **res, int i, char *cmd)
+{
+	while (res[i])
+	{	
+		res[i] = ft_strjoin(res[i], "/");
+		res[i] = ft_strjoin(res[i], cmd);
+		i++;
+	}
 }
