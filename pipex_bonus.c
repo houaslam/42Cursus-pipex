@@ -6,11 +6,11 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:08:50 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/10 16:16:48 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:51:43 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"pipex.h"
+#include "pipex_bonus.h" 
 
 int	main(int ac, char **av, char **envp)
 {
@@ -73,9 +73,13 @@ void	cmd_exec(int sv[2], int ac, char **av, char **envp)
 void	cmd_exec2(int sv[2], int i, int fd[2])
 {
 	if (i == 2)
-		dup2(sv[0], 0);
+	{
+		if (dup2(sv[0], 0) == -1)
+			ft_putstr_fd("dup Error", 2, 1);
+	}	
 	close(fd[0]);
-	dup2(fd[1], 1);
+	if (dup2(fd[1], 1) == -1)
+		ft_putstr_fd("dup Error", 2, 1);
 	close(sv[0]);
 }
 

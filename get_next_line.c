@@ -6,11 +6,12 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 14:45:56 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/05 14:48:20 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:46:31 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "pipex_bonus.h" 
 
 char	*ft_handle(char *buf)
 {

@@ -6,11 +6,12 @@
 /*   By: houaslam <houaslam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:10:00 by houaslam          #+#    #+#             */
-/*   Updated: 2023/01/10 15:57:50 by houaslam         ###   ########.fr       */
+/*   Updated: 2023/01/12 12:46:05 by houaslam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h" 
+#include "pipex_bonus.h" 
 
 char	*path_find(char **envp, char *cmd)
 {
